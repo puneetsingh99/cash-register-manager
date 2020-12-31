@@ -1,128 +1,100 @@
-// const body = document.body;
+const bill = document.querySelector("#inp-bill");
+const amount = document.querySelector("#inp-amt");
+const table = document.querySelector("#tbl-output");
 
-// let inputBill = document.createElement("input");
-// inputBill.type = "Number";
+function keyupHandler(key){
+    if(key.keyCode === 13){
+        if(this.id === "inp-bill"){
+            let inpBill = bill.value;
+            amount.disabled = false;
+            amount.focus();            
+        } else{
+            let inpAmount = amount.value;
+            bill.focus();
+        }
+    }
 
-// console.log("gekkiw")
-// console.log(inputBill);
-
-// let table = document.createElement("table");
-
-
-
-
-let btnCalculate = document.querySelector("#btn-calculate");
-let divOutput = document.querySelector("#div-output");
-let denominations = [2000, 500, 100, 20, 10, 5, 1];
-
-let noteTwoThousand = 0;
-let noteFiveHundred = 0;
-let noteOneHundred = 0;
-let noteTwenty = 0;
-let noteTen = 0;
-let noteFive = 0;
-let noteOne = 0;
-
-function clickHandler(){
-    let inputBill = document.querySelector("#inp-bill");
-    let inputAmt = document.querySelector("#inp-amt");
-
-    let bill = inputBill.value;
-    let amount = inputAmt.value;
-    let balance = amount - bill;
+    console.log(inpBill);
+    console.log(inpAmount)
+    let balance = inpAmount - inpBill;
+    console.log(balance);
     
-    calculate(balance);
 }
 
-btnCalculate.addEventListener("click", clickHandler);
 
-function countNotes(denomination, amount){
-    let count = amount/denomination;
-    let newAmount = amount % denomination;
+bill.addEventListener("keyup", keyupHandler);
+amount.addEventListener("keyup", keyupHandler);
+
+function generateTableHead(tbl, data){
+    let thead = tbl.createTHead();
+    let row = thead.insertRow();
+
+    for(let key of data){
+        let th = document.createElement("th");
+        let text = document.createTextNode(key);
+        th.appendChild(text);
+        row.appendChild(th);
+    }
+}
+
+function generateTable(tbl, data){
+    console.log("inside table generator");
+    let arrOfNotes = Object.keys(data);
+    console.log(arrOfNotes);
+    for (element of data){
+        let row = tbl.insertRow();
+
+        let cell1 = row.insertCell();
+        let text1 = document.createTextNode(element);
+        let cell2 = row.insertCell();
+        let text2 = document.createTextNode(data[element]);
+
+        cell1.appendChild(text1);
+        cell2.appendChild(text2);
+    }
+    
+}
+
+
+
+function noteCounter(denominaton, amount){
+    let count = amount / denominaton;
+    let newAmount = amount % denominaton;
 
     return [Math.floor(count), newAmount];
 }
 
+let nd = [];
+let countOfNotes  = [];
+let denominations = [2000, 500, 100, 20, 10, 5, 1];
+
 function calculate(balance){
-    console.log("Balance: " + balance);
     if(balance == 0){
-        console.log("Thank you for shopping with us");
-    } else if(balance < 0){
-        console.log("Please pay Rs."+ -balance + " more");
+        console.log("Thank you for shopping");
+    }else if (balance < 0){
+        console.log("Please pay " + balance + " rs more");
     }else{
         let notes = denominations.filter(n => n <= balance);
-
-        notes.forEach(n => {
+        console.log(notes);
+        // let noteObj = {};
+        notes.map( n => {
             if(balance >= n){
-                let [numOfnotes, newBalance] = countNotes(n, balance);
-
+                let [noteCount, newBalance] = noteCounter(n, balance);
                 balance = newBalance;
-
-                switch(n){
-                    case 2000: noteTwoThousand = numOfnotes; break;
-                    case 500: noteFiveHundred = numOfnotes; break;
-                    case 100: noteOneHundred = numOfnotes; break;
-                    case 20: noteTwenty = numOfnotes; break;
-                    case 10: noteTen = numOfnotes; break;
-                    case 5: noteFive = numOfnotes; break;
-                    case 1: noteOne = numOfnotes; break;
-                }
+                const currNote = n;
+                console.log("currNote " + currNote);
+                nd.push(currNote);
+                countOfNotes.push(noteCount);
             }
-        });
+        })
 
-        console.log("noteTwoThousand : "+ noteTwoThousand);
-        console.log("noteFiveHundred : "+ noteFiveHundred);
-        console.log("noteOneHundred : "+ noteOneHundred);
-        console.log("noteTwenty : "+ noteTwenty);
-        console.log("noteTen : "+ noteTen);
-        console.log("noteFive : "+ noteFive);
-        console.log("noteOne : "+ noteOne);
-        
-        outputStr = "";
-
-        if(noteTwoThousand > 0){
-            outputStr += "2000: " + noteTwoThousand + "\n";
-        } 
-        if(noteFiveHundred > 0){
-            outputStr += "500: " + noteFiveHundred + "\n";
-        }
-        if(noteOneHundred > 0){
-            outputStr += "100: " + noteOneHundred + "\n";
-        }
-        if(noteTwenty > 0){
-            outputStr += "20: " + noteTwenty + "\n";
-        }
-        if(noteTen > 0){
-            outputStr += "10: " + noteTen + "\n";
-        }
-        if(noteFive > 0){
-            outputStr += "5: " + noteFive + "\n";
-        }
-        if(noteOne > 0){
-            outputStr += "1: " + noteOne + "\n";
-        }
-
-        console.log("output str: \n"+outputStr);
-        divOutput.innerHTML = outputStr;
-        console.log(divOutput);
-        
     }
 }
 
 
-// let denominations = [2000, 500, 100, 20, 10, 5, 1];
-
-// let balance = amount - bill;
-
-//     if(balance === 0){
-//         console.log("Thank you for shopping with us");
-//         // divOutput.innerHTML = "Thank you for shopping with us";
-//     } else if(balance < 0){
-//         console.log("Please pay "+ -balance +" more");
-//         // divOutput.innerHTML = "Please pay "+ -balance +" more";
-//     } else {
-//         let notes = denominations.filter(n => n <= balance);
-//         console.log(balance)
-//         console.log(notes);
-//         // divOutput.innerHTML = notes;
-//     }
+// generateTable(table, noteObj);
+generateTableHead(table, ["Note", "quantity"] );
+console.log(calculate(69));
+console.log("Notes array: " + nd);
+console.log("Count of notes: " + countOfNotes);
+// console.log(noteObj);

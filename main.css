@@ -1,44 +1,11 @@
-/* #tbl-output{
-    display: flex;
-} */
-
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-table{
-    background-color: steelblue;
-    display: flex;
-    text-align: start;
-    border: 2px solid black;
-    width: 500px;
-    margin: auto;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-tr, td, th{
-    padding: 0.5rem;
-}
-thead tr{
-    display: flex;
-    flex-direction: column;
-    border-right: 1px solid;
-}
-
-tbody{
-    display: flex;
-}
-
-tbody tr{
-    display: flex;
-    flex-direction: column;
-}
-
-th{
-    align-self: flex-start;
-    border-bottom: solid 1px;
-}
-
-td{
-    align-self: center;
+table,
+th,
+td {
+  border: solid 1px black;
 }

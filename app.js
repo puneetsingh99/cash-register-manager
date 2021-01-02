@@ -43,7 +43,9 @@ function keyupHandler(key){
             if(message !== ""){
                 output.innerText = message;
                 btnReset.style.display = 'block';
+                output.style.display = 'block';
             }else{ 
+                output.style.display = 'none';
                     rows = `
                     <tr>
                         <th> Note </th>

@@ -1,16 +1,28 @@
-const body = document.body;
 const bill = document.querySelector("#inp-bill");
 const amount = document.querySelector("#inp-amt");
-const table = document.querySelector("#tbl-output");
-table.style.display = "none";
+let tbody = document.querySelector("#tbl-body");
+let table = document.querySelector("table");
+let btnReset = document.querySelector("#btn-reset");
+var buttonFlag = false;
+
+if(buttonFlag === false){
+    btnReset.style.display = 'none';
+}else{
+    btnReset.style.display = 'block';
+}
+
+table.style.display = 'none';
+
+
+btnReset.addEventListener("click", reset);
 
 const output = document.querySelector("#heading-output");
 console.log(output);
+
 let inpBill, inpAmount, balance;
 
-let nd = [];
-let countOfNotes  = [];
-let message = "";
+
+
 let denominations = [2000, 500, 100, 20, 10, 5, 1];
 
 
@@ -24,42 +36,45 @@ function keyupHandler(key){
         } else{
             inpAmount = amount.value;
             console.log("inpAmount: " + inpAmount);
-            bill.focus();
             balance = inpAmount - inpBill;
-            calculate(balance);
+            bill.focus();
+            buttonFlag = true;
+           let [nd, countOfNotes, message] = calculate(balance);
             if(message !== ""){
                 output.innerText = message;
-                table.innerHTML =  ``;
-            }else{     
-                table.innerHTML =  ``;
-                rows = `<thead> 
+                btnReset.style.display = 'block';
+            }else{ 
+                    rows = `
                     <tr>
                         <th> Note </th>
-                    </tr>
-                    <tr>
                         <th> No of notes </th>
                     </tr>
-                </thead>`
+                    `
                 nd.map((n, index) => {
-                    rows += `<tbody> 
+                    rows += `
                     <tr>
                         <td> ${n} </td>
-                    </tr>
-                    <tr>
                         <td> ${countOfNotes[index]} </td>
                     </tr>
-                    </tbody>`
+                   `
                 })
-                table.innerHTML = rows;
-                table.style.display = "block";
-                
+
+                tbody.innerHTML = rows;
+                table.style.display = 'block';
+                btnReset.style.display = 'block';
+                             
             }
+
+            
             
         }
     } 
     
 }
 
+function reset(){
+    window.location.reload();
+}
 
 bill.addEventListener("keyup", keyupHandler);
 amount.addEventListener("keyup", keyupHandler);
@@ -74,10 +89,13 @@ function noteCounter(denominaton, amount){
 
 
 function calculate(balance){
+    let nd = [];
+    let countOfNotes  = [];
+    let message = "";
     if(balance == 0){
         message = "Thank you for shopping";
     }else if (balance < 0){
-        message =  "Please pay " + balance + " rs more";
+        message =  "Please pay " + -balance + " rs more";
     }else{
         let notes = denominations.filter(n => n <= balance);
         console.log("notes for this balance: " + notes);
@@ -93,4 +111,6 @@ function calculate(balance){
         })
 
     }
+
+    return [nd, countOfNotes, message];
 }

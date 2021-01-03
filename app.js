@@ -44,10 +44,11 @@ function keyupHandler(key){
                 output.innerText = message;
                 btnReset.style.display = 'block';
                 output.style.display = 'block';
+                table.style.display = 'none';
             }else{ 
                 output.style.display = 'none';
                     rows = `
-                    <tr>
+                    <tr id = "tbl-head">
                         <th> Note </th>
                         <th> No of notes </th>
                     </tr>
@@ -95,7 +96,7 @@ function calculate(balance){
     let countOfNotes  = [];
     let message = "";
     if(balance == 0){
-        message = "Thank you for shopping";
+        message = "Bill = Amount Paid";
     }else if (balance < 0){
         message =  "Please pay " + -balance + " rs more";
     }else{

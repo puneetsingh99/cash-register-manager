@@ -1,11 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-table,
-th,
+:root {
+  --clr-primary: #e8e8e8;
+  --clr-secondary: #2b323f;
+  --clr-tertiary: #D8D4CD;
+}
+
+body {
+  height: 100vh;
+  font-family: "Lato", sans-serif;
+  background-color: var(--clr-tertiary);
+  display: flex;
+}
+
+#container {
+  background-color: var(--clr-tertiary);
+  margin: auto;
+  text-align: center;
+  padding: 2rem;
+  min-height: 80%;
+  min-width: 500px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  box-shadow: 8px 8px 12px 0px rgba(0, 0, 0, 0.3),
+            -8px -8px 12px 0px rgb(255, 255, 255, 0.3);
+}
+h1 {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 2.3rem;
+}
+
+h2 {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 1.6rem;
+}
+
+
+
+button,
+input {
+  margin-bottom: 2rem;
+  box-shadow: 8px 8px 12px 0px rgba(0, 0, 0, 0.3),
+            -8px -8px 12px 0px rgb(255, 255, 255, 0.3);
+}
+#container h1 {
+  color: var(--clr-secondary);
+  margin-bottom: 2rem;
+  text-shadow:-3px 3px 5px rgba(0,0,0,0.5),
+  -3px -3px 5px rgba(255,255,255,0.8);
+}
+
+#heading-output {
+  color: var(--clr-secondary);
+}
+input {
+  display: block;
+}
+input,
+button {
+  padding: 0.5rem;
+  font-size: large;
+  border-radius: 5px;
+}
+button {
+  text-transform: uppercase;
+  border: 1px solid var(--clr-secondary);
+  background-color: var(--clr-secondary);
+  color: var(--clr-primary);
+  letter-spacing: 2px;
+  padding: 0.5rem 1.5rem;
+  font-size: larger;
+}
+/* 
+input, table{
+  margin: 2rem;
+} */
+
+
+.tbl-content {
+  margin: auto;
+  border-collapse: collapse;
+  max-width: 400px;
+  font-size: 0.9em;
+  text-align: center;
+  box-shadow: 8px 8px 12px 0px rgba(0, 0, 0, 0.3),
+            -8px -8px 12px 0px rgb(255, 255, 255, 0.3);
+  
+}
+
+table tbody {
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+th {
+  padding: 1rem;
+  background-color: var(--clr-secondary);
+  color: var(--clr-primary);
+  font-size: larger;
+  text-transform: uppercase;
+
+}
+
 td {
-  border: solid 1px black;
+  background-color: var(--clr-tertiary);
+  padding: 0.4rem 1rem;
+  margin: 1rem;
+  font-size: larger;
+  text-align: start;
+  border-radius: 5px;
+  
 }

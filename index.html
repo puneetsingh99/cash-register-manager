@@ -6,16 +6,21 @@
     <link rel="stylesheet" href="main.css">
     <title>Cash Manager</title>
 </head>
-<body>
-    <h1>Cash Manager</h1>
-    <input type="number" id="inp-bill" placeholder="Enter Bill amount">
-    <input type="number" id="inp-amt" disabled placeholder="Enter Amount paid">
-    <h2 id="heading-output"></h2>
-    <button id="btn-reset"> Reset </button>
-    <table>
-        <tbody id="tbl-body">
-        </tbody>
-    </table>  
-    <script src="app.js"></script>
+<body>    
+    <div id="container">
+        <nav id="nav">
+            <h1>Cash Manager</h1>
+        </nav>
+        <input type="number" id="inp-bill" placeholder="Enter Bill amount then [press Enter]">
+        <input type="number" id="inp-amt" disabled placeholder="Enter Amount paid then [press Enter]">
+        <button id="btn-reset"> Reset </button>
+        <h2 id="heading-output"></h2>
+        
+        <table class="tbl-content">
+            <tbody id="tbl-body">
+            </tbody>
+        </table>  
+        <script src="app.js"></script>
+    </div>
 </body>
 </html>
